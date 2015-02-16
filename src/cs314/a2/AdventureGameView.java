@@ -21,10 +21,10 @@ public class AdventureGameView extends GBFrame {
 	JLabel viewLabel = addLabel("Your View: ", 2, 1, 1, 1);
 	JTextArea viewArea = addTextArea("Start", 3, 1, 4, 3);
 
-	JLabel carryingLabel = addLabel("You are carying: ", 6, 1, 1, 1);
+	JLabel carryingLabel = addLabel("You are carrying: ", 6, 1, 1, 1);
 	JTextArea carryingArea = addTextArea("Nothing", 7, 1, 4, 3);
 
-	JLabel statusLabel = addLabel("Status of the game: ", 10, 1, 1, 1);
+	JLabel statusLabel = addLabel("Status messages: ", 10, 1, 1, 1);
 	JTextArea statusArea = addTextArea("You are in the outside room right now\n",
 			11, 1, 4, 3);
 
@@ -62,22 +62,22 @@ public class AdventureGameView extends GBFrame {
 
 	public void buttonClicked(JButton buttonObj) {
 		if (buttonObj == upButton)
-			statusArea.append(model.goUp()+"\n");
+			updateStatusArea(model.goUp());
 
 		else if (buttonObj == downButton)
-			statusArea.append(model.goDown()+"\n");
+			updateStatusArea(model.goDown());
 
 		else if (buttonObj == northButton)
-			statusArea.append(model.goNorth()+"\n");
+			updateStatusArea(model.goNorth());
 
 		else if (buttonObj == southButton)
-			statusArea.append(model.goSouth()+"\n");
+			updateStatusArea(model.goSouth());
 
 		else if (buttonObj == eastButton)
-			statusArea.append(model.goEast()+"\n");
+			updateStatusArea(model.goEast());
 
 		else if (buttonObj == westButton)
-			statusArea.append(model.goWest()+"\n");
+			updateStatusArea(model.goWest());
 
 		else if (buttonObj == grabButton)
 			grab();
@@ -92,7 +92,13 @@ public class AdventureGameView extends GBFrame {
 
 	private void displayCurrentInfo() {
 		viewArea.setText(model.getView());
-		carryingArea.setText(model.getItems());
+			
+		String retVal=model.getItems();		
+		carryingArea.setText(retVal==""?"Nothing":retVal);
+	}
+	
+	private void updateStatusArea(String str) {
+		statusArea.append(str+"\n");
 	}
 
 	private void grab() {
@@ -100,7 +106,7 @@ public class AdventureGameView extends GBFrame {
 		if (model.canGrabItem()) {
 			if (model.roomEmpty()) {
 				// Show dialog that the room doesn't have any items at all
-				statusArea.setText("The room doesn't have any items to pick up");						
+				updateStatusArea("The room doesn't have any items to pick up");						
 			} else {
 				// Show Grab Dialog
 				popGrabDialog();
@@ -108,7 +114,7 @@ public class AdventureGameView extends GBFrame {
 
 		} else {
 			// Show dialog that the player's hands are already full
-			statusArea.setText("You can't pick up any more items");
+			updateStatusArea("You can't pick up any more items");
 		}
 
 	}
@@ -120,7 +126,7 @@ public class AdventureGameView extends GBFrame {
 			popDropDialog();
 		} else {
 			// Show dialog that the player's hands are empty
-			statusArea.setText("You don't have any items to drop");					
+			updateStatusArea("You don't have any items to drop");					
 		}
 	}
 

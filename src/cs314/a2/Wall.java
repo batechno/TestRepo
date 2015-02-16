@@ -11,9 +11,15 @@ package cs314.a2;
 // class Wall
 
 public class Wall implements CaveSite {
+	
+	private String wallType;
+	
+	Wall(String wStr) {
+		wallType=wStr;
+	}
 
 	public String enter(Player p) {
-		return "You ran into a wall! That hurts.";
+		return "You tried to go "+wallType+". But, ran into a wall! That hurts.";
 	}
 
 }

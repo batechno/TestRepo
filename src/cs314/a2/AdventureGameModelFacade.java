@@ -2,11 +2,6 @@ package cs314.a2;
 
 public class AdventureGameModelFacade {
 
-	// some private fields to reference current location,
-	// its description, what I'm carrying, etc.
-	//
-	// These methods and fields are left as exercises.
-
 	private Player thePlayer;
 
 	AdventureGameModelFacade() { // we initialize
@@ -22,7 +17,7 @@ public class AdventureGameModelFacade {
 	}
 
 	/*
-	 * North - 0 South - 1 East - 2 West - 3 Up - 4 Down - 5
+	 * 0-North 1-South 2-East 3-West 4-Up 5-Down
 	 */
 
 	public String goUp() {

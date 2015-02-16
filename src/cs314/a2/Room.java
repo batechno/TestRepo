@@ -27,12 +27,12 @@ public class Room implements CaveSite {
 	private ArrayList<Item> contents = new ArrayList<Item>();
 
 	Room() {
-		side[0] = new Wall();
-		side[1] = new Wall();
-		side[2] = new Wall();
-		side[3] = new Wall();
-		side[4] = new Wall();
-		side[5] = new Wall();
+		side[0] = new Wall("North");
+		side[1] = new Wall("South");
+		side[2] = new Wall("East");
+		side[3] = new Wall("West");
+		side[4] = new Wall("Up");
+		side[5] = new Wall("Down");
 	}
 
 	public void setId(String idStr) {
