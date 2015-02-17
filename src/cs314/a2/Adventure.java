@@ -49,6 +49,11 @@ The main routine is AdventureGame.main
 
 */
 
+/*
+	Added an "id" field to each one of the rooms.
+	So, that the present position of the player can be printed quite easily in the status messages.
+ */
+
 public class Adventure {
 
   private Room entrance;

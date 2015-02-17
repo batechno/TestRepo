@@ -48,6 +48,10 @@ The main routine is AdventureGame.main
 		    
 		    **/
 
+/*
+ * No changes have been made to this file as well.
+ */
+
 import java.io.*;
 
 

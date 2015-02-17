@@ -13,6 +13,10 @@ package cs314.a2;
 
  **/
 
+/*
+ * Included positional information about the walls of a room along with an id. 
+ */
+
 // class Room
 
 import java.util.ArrayList;
@@ -26,6 +30,7 @@ public class Room implements CaveSite {
 
 	private ArrayList<Item> contents = new ArrayList<Item>();
 
+	//Now we pass on positional information about the wall as well.
 	Room() {
 		side[0] = new Wall("North");
 		side[1] = new Wall("South");
@@ -35,6 +40,7 @@ public class Room implements CaveSite {
 		side[5] = new Wall("Down");
 	}
 
+	//Sets up the identifier to be used in status messages.
 	public void setId(String idStr) {
 		id = idStr;
 	}
@@ -65,11 +71,14 @@ public class Room implements CaveSite {
 		return contentsArray;
 	}
 	
+	//Retrieve the item at a particular index
 	public Item getItem(int index) {
 		
 		return contents.get(index);
 	}
 
+	//Now this function returns a string which is just 
+	//appended to the set of status messages
 	public String enter(Player p) {
 		String retString = "You moved from \"" + p.getLoc().getId()
 				+ "\" to \"" + this.getId() + "\"";
@@ -92,6 +101,7 @@ public class Room implements CaveSite {
 				+ '\n';
 	}
 
+	//Retrieve the id associated with this room
 	public String getId() {
 		return id;
 	}

@@ -6,7 +6,7 @@ public class AdventureGameModelFacade {
 
 	AdventureGameModelFacade() { // we initialize
 
-		// Create model and initialize the player
+		// Create a model and initialize the player
 		
 		Adventure theCave = new Adventure();
 		Room startRm = theCave.createAdventure();
@@ -20,6 +20,12 @@ public class AdventureGameModelFacade {
 	 * 0-North 1-South 2-East 3-West 4-Up 5-Down
 	 */
 
+	//Player movement related functions
+	//If the player was able to make a move: We return a message that the player moved from R{0-9}*->R{0-9}*
+	
+	//If he encounters a wall in that direction or doesn't have a key to open a trap door.
+	//Then we return the relevant error message.
+	
 	public String goUp() {
 		return thePlayer.go(4);
 	}
@@ -48,6 +54,7 @@ public class AdventureGameModelFacade {
 		return thePlayer.getLoc().getDesc();
 	}
 
+	//Info retrieval functions
 	public String getItemListInStr() {
 		return thePlayer.showMyThings();
 	}
@@ -64,6 +71,18 @@ public class AdventureGameModelFacade {
 		return thePlayer.getNumItems();
 	}	
 
+	//Functionality
+	public void grabItem(int index)
+	{
+		thePlayer.pickUp(thePlayer.getLoc().getItem(index));
+	}
+	
+	public void dropItem(int index)
+	{
+		thePlayer.drop(index+1);
+	}
+		
+	//Checks
 	public boolean canGrabItem() {
 		return !thePlayer.handsFull();
 	}
@@ -74,16 +93,6 @@ public class AdventureGameModelFacade {
 
 	public boolean roomEmpty() {
 		return thePlayer.getLoc().roomEmpty();
-	}
-
-	public void grabItem(int index)
-	{
-		thePlayer.pickUp(thePlayer.getLoc().getItem(index));
-	}
-	
-	public void dropItem(int index)
-	{
-		thePlayer.drop(index+1);
 	}
 	
 }

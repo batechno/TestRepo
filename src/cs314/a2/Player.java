@@ -8,6 +8,10 @@ package cs314.a2;
  * The main routine is AdventureGame.main
  **/
 
+/*
+ * Added a couple of very minor get functions
+ */
+
 public class Player {
 
 	private Room myLoc;
@@ -89,10 +93,14 @@ public class Player {
 		return itemCount;
 	}
 
+	//Retrieves the list of items
 	public Item[] getItems() {
 		return myThings;
 	}
 	
+	//myThings isn't dynamically allocated. Its length will always be 2 
+	//irrespective of the presence of items.
+	//This function helps in solving that problem
 	public int getNumItems() {
 		return itemCount;
 	}

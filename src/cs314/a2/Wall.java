@@ -8,18 +8,23 @@ package cs314.a2;
  * The main routine is AdventureGame.main
  **/
 
+/*
+ * Stored info regarding the position of this wall, to print out error messages 
+ * which make more sense.
+ */
+
 // class Wall
 
 public class Wall implements CaveSite {
 	
-	private String wallType;
+	private String wallPos;
 	
 	Wall(String wStr) {
-		wallType=wStr;
+		wallPos=wStr;
 	}
 
 	public String enter(Player p) {
-		return "You tried to go \""+wallType+"\". But, ran into a wall! That hurts.";
+		return "You tried to go \""+wallPos+"\". But, ran into a wall! That hurts.";
 	}
 
 }

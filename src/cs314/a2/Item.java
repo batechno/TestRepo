@@ -8,6 +8,9 @@ package cs314.a2;
  * The main routine is AdventureGame.main
  **/
 
+//Added a function which just returns the text for this item to be used on a button,
+//which will be used to grab/drop the items.
+
 // class Item
 
 public class Item {

@@ -8,6 +8,8 @@ package cs314.a2;
  * The main routine is AdventureGame.main
  **/
 
+//Modified the enter function to return a string
+
 // class Door
 
 public class Door implements CaveSite {
@@ -31,6 +33,7 @@ public class Door implements CaveSite {
 	}
 
 	/** A player will need the correct key to enter. */
+	//Modified this function to return a string
 	public String enter(Player p) {
 		
 		if (p.haveItem(myKey)) {

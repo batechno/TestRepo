@@ -4,6 +4,13 @@ import javax.swing.*;
 
 import BreezySwing.*;
 
+/*
+ * Added a couple of fields to the GUI to show status messages.
+ * Initialization of a GBDialog which pops up whenever you want to either drop or grab an item
+ * A couple of other functions which help in interacting easily with the Model while 
+ * dropping/ grabbing items.
+ */
+
 public class AdventureGameView extends GBFrame {
 
 	/**
@@ -24,6 +31,8 @@ public class AdventureGameView extends GBFrame {
 	JLabel carryingLabel = addLabel("You are carrying: ", 6, 1, 1, 1);
 	JTextArea carryingArea = addTextArea("Nothing", 7, 1, 4, 3);
 
+	//Added these two fields.
+	//All the status messages will be appended to the textarea.
 	JLabel statusLabel = addLabel("Status messages: ", 10, 1, 1, 1);
 	JTextArea statusArea = addTextArea("You are in the outside room right now\n",
 			11, 1, 4, 3);
@@ -47,6 +56,7 @@ public class AdventureGameView extends GBFrame {
 
 	AdventureGameModelFacade model;
 	
+	//A Dialog which pops up whenever you want to either drop or grab an item
 	private PopupDialog iDialog;
 
 	// Constructor-----------------------------------------------
@@ -59,12 +69,16 @@ public class AdventureGameView extends GBFrame {
 		carryingArea.setEditable(false);
 		displayCurrentInfo();
 		
+		//We just initialize it once and hide it whenever it isn't in use. 
 		iDialog=new PopupDialog(this);
 	}
 
 	// buttonClicked method--------------------------------------
 
 	public void buttonClicked(JButton buttonObj) {
+		
+		/*Update the StatusArea with the info returned*/ 
+		
 		if (buttonObj == upButton)
 			updateStatusArea(model.goUp());
 
@@ -92,6 +106,9 @@ public class AdventureGameView extends GBFrame {
 		displayCurrentInfo();
 	}
 	
+	/*
+	 * Grab the item with the relevant index from the room 
+	 */
 	public void grabItem(int index, String pText)
 	{
 		model.grabItem(index);
@@ -100,6 +117,9 @@ public class AdventureGameView extends GBFrame {
 		updateStatusArea("Grabbed \""+pText+"\".");
 	}
 	
+	/*
+	 * Drop the item with the relevant index held by the player 
+	 */	
 	public void dropItem(int index, String pText)
 	{
 		model.dropItem(index);
@@ -117,15 +137,17 @@ public class AdventureGameView extends GBFrame {
 		carryingArea.setText(retVal==""?"Nothing":retVal);
 	}
 	
+	//A function to append a status message
 	private void updateStatusArea(String str) {
 		statusArea.append(str+"\n");
 	}
 
 	private void grab() {
 
+		//A check to see whether the player's hands aren't full
 		if (model.canGrabItem()) {
 			if (model.roomEmpty()) {
-				// Show dialog that the room doesn't have any items at all
+				// Append message that the room doesn't have any items at all
 				updateStatusArea("The room doesn't have any items for you to pick up");						
 			} else {
 				// Show Grab Dialog
@@ -133,7 +155,7 @@ public class AdventureGameView extends GBFrame {
 			}
 
 		} else {
-			// Show dialog that the player's hands are already full
+			// Append message that the player's hands are already full
 			updateStatusArea("You can't pick up any more items");
 		}
 
@@ -141,11 +163,12 @@ public class AdventureGameView extends GBFrame {
 
 	private void drop() {
 
+		//A check to see whether the player is carrying any items at all.
 		if (model.canDropItem()) {
 			// Show Drop Dialog
 			iDialog.showDropDialog(model.getItemsWithPlayer(), model.getNumItemsWithPlayer());			
 		} else {
-			// Show dialog that the player's hands are empty
+			// Append message that player's hands are empty
 			updateStatusArea("You don't have any items to drop");					
 		}
 	}	
