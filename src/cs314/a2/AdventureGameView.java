@@ -46,6 +46,8 @@ public class AdventureGameView extends GBFrame {
 	JButton downButton = addButton("Down", 18, 3, 1, 1);
 
 	AdventureGameModelFacade model;
+	
+	private PopupDialog iDialog;
 
 	// Constructor-----------------------------------------------
 
@@ -56,6 +58,8 @@ public class AdventureGameView extends GBFrame {
 		viewArea.setEditable(false);
 		carryingArea.setEditable(false);
 		displayCurrentInfo();
+		
+		iDialog=new PopupDialog(this);
 	}
 
 	// buttonClicked method--------------------------------------
@@ -87,13 +91,29 @@ public class AdventureGameView extends GBFrame {
 
 		displayCurrentInfo();
 	}
+	
+	public void grabItem(int index, String pText)
+	{
+		model.grabItem(index);
+		
+		displayCurrentInfo();
+		updateStatusArea("Grabbed \""+pText+"\".");
+	}
+	
+	public void dropItem(int index, String pText)
+	{
+		model.dropItem(index);
+		
+		displayCurrentInfo();
+		updateStatusArea("Dropped \""+pText+"\".");
+	}		
 
 	// Private methods-------------------------------------------
 
 	private void displayCurrentInfo() {
 		viewArea.setText(model.getView());
 			
-		String retVal=model.getItems();		
+		String retVal=model.getItemListInStr();		
 		carryingArea.setText(retVal==""?"Nothing":retVal);
 	}
 	
@@ -106,10 +126,10 @@ public class AdventureGameView extends GBFrame {
 		if (model.canGrabItem()) {
 			if (model.roomEmpty()) {
 				// Show dialog that the room doesn't have any items at all
-				updateStatusArea("The room doesn't have any items to pick up");						
+				updateStatusArea("The room doesn't have any items for you to pick up");						
 			} else {
 				// Show Grab Dialog
-				popGrabDialog();
+				iDialog.showGrabDialog(model.getItemsInRoom());				
 			}
 
 		} else {
@@ -123,20 +143,12 @@ public class AdventureGameView extends GBFrame {
 
 		if (model.canDropItem()) {
 			// Show Drop Dialog
-			popDropDialog();
+			iDialog.showDropDialog(model.getItemsWithPlayer(), model.getNumItemsWithPlayer());			
 		} else {
 			// Show dialog that the player's hands are empty
 			updateStatusArea("You don't have any items to drop");					
 		}
-	}
-
-	private void popGrabDialog() {
-
-	}
-	
-	private void popDropDialog() {
-		
-	}
+	}	
 
 	public static void main(String[] args) {
 		JFrame view = new AdventureGameView();

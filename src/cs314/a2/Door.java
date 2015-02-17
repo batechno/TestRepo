@@ -39,10 +39,10 @@ public class Door implements CaveSite {
 			else if (p.getLoc() == inSite)
 				outSite.enter(p);
 
-			return "Your key works! The door creaks open,\nand slams behind you after you pass through.";
+			return "Your key works! The door creaks open, and slams behind you after you pass through.\nYou are in \""+p.getLoc().getId()+"\"";
 			
 		} else
-			return "You don't have the key for this door!\nSorry.";
+			return "You don't have the key for this door! Sorry. You are still in \""+p.getLoc().getId()+"\"";
 	}
 
 }

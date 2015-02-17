@@ -64,6 +64,11 @@ public class Room implements CaveSite {
 		contentsArray = contents.toArray(contentsArray);
 		return contentsArray;
 	}
+	
+	public Item getItem(int index) {
+		
+		return contents.get(index);
+	}
 
 	public String enter(Player p) {
 		String retString = "You moved from \"" + p.getLoc().getId()
@@ -81,7 +86,7 @@ public class Room implements CaveSite {
 		String contentString = "";
 		while (roomContents.hasNext())
 			contentString = contentString + (roomContents.next()).getDesc()
-					+ " ";
+					+ "\n";
 
 		return description + '\n' + '\n' + "Room Contents: " + contentString
 				+ '\n';

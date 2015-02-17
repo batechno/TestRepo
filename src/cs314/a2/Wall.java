@@ -19,7 +19,7 @@ public class Wall implements CaveSite {
 	}
 
 	public String enter(Player p) {
-		return "You tried to go "+wallType+". But, ran into a wall! That hurts.";
+		return "You tried to go \""+wallType+"\". But, ran into a wall! That hurts.";
 	}
 
 }

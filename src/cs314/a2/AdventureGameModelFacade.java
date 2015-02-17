@@ -6,12 +6,12 @@ public class AdventureGameModelFacade {
 
 	AdventureGameModelFacade() { // we initialize
 
-		// Create the model and initialize the player
-
-		thePlayer = new Player();
-
+		// Create model and initialize the player
+		
 		Adventure theCave = new Adventure();
 		Room startRm = theCave.createAdventure();
+		
+		thePlayer = new Player();		
 		thePlayer.setRoom(startRm);
 
 	}
@@ -48,9 +48,21 @@ public class AdventureGameModelFacade {
 		return thePlayer.getLoc().getDesc();
 	}
 
-	public String getItems() {
+	public String getItemListInStr() {
 		return thePlayer.showMyThings();
 	}
+	
+	public Item[] getItemsInRoom() {
+		return thePlayer.getLoc().getRoomContents();
+	}
+	
+	public Item[] getItemsWithPlayer() {
+		return thePlayer.getItems();
+	}
+	
+	public int getNumItemsWithPlayer() {
+		return thePlayer.getNumItems();
+	}	
 
 	public boolean canGrabItem() {
 		return !thePlayer.handsFull();
@@ -64,4 +76,14 @@ public class AdventureGameModelFacade {
 		return thePlayer.getLoc().roomEmpty();
 	}
 
+	public void grabItem(int index)
+	{
+		thePlayer.pickUp(thePlayer.getLoc().getItem(index));
+	}
+	
+	public void dropItem(int index)
+	{
+		thePlayer.drop(index+1);
+	}
+	
 }
