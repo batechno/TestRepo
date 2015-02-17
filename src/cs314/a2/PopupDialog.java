@@ -8,10 +8,12 @@ public class PopupDialog extends GBDialog {
 	
 	private static final long serialVersionUID = 1L;	
 	
-	private JLabel infoLabel = addLabel("Select an item", 2, 1, 1, 1);
+	private JLabel infoLabel = addLabel("Select an item", 1, 1, 1, 1);
 
-	private JButton keyButton = addButton("Key", 3, 1, 1, 1);
-	private JButton treasureButton = addButton("Treasure", 3, 2, 1, 1);	
+	private JButton keyButton = addButton("Key", 2, 1, 1, 1);
+	private JButton treasureButton = addButton("Treasure", 3, 1, 1, 1);	
+	
+	
 	private int keyIndex, treasureIndex, windowType;
 	
 	private AdventureGameView mainWindow; 
@@ -23,8 +25,8 @@ public class PopupDialog extends GBDialog {
 		
 		this.mainWindow=mFrame;
 		
-		keyButton.setEnabled(false);
-		treasureButton.setEnabled(false);
+		keyButton.setVisible(false);
+		treasureButton.setVisible(false);	
 		
 		setVisible(false);
 		setTitle("Dialog");
@@ -54,8 +56,8 @@ public class PopupDialog extends GBDialog {
 	
 	public void setIndexes(Item[] iList, int arrayLength)
 	{		
-		keyButton.setEnabled(false);
-		treasureButton.setEnabled(false);
+		keyButton.setVisible(false);
+		treasureButton.setVisible(false);
 		
 		keyIndex=-1;
 		treasureIndex=-1;
@@ -65,13 +67,13 @@ public class PopupDialog extends GBDialog {
 			if(iList[i].getButtonText().equals("Key"))
 			{
 				keyIndex=i;
-				keyButton.setEnabled(true);
+				keyButton.setVisible(true);
 			}
 			
 			else if(iList[i].getButtonText().equals("Treasure"))
 			{
 				treasureIndex=i;
-				treasureButton.setEnabled(true);
+				treasureButton.setVisible(true);
 			}
 			
 		}		
